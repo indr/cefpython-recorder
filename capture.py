@@ -5,11 +5,6 @@ example doesn't depend on any third party GUI framework.
 This example is discussed in Tutorial in the Off-screen
 rendering section.
 
-Before running this script you have to install Pillow image
-library (PIL module):
-
-    pip install Pillow
-
 With optionl arguments to this script you can resize viewport
 so that screenshot includes whole page with height like 5000px
 which would be an equivalent of scrolling down multiple pages.
@@ -32,13 +27,6 @@ import signal
 import subprocess
 import sys
 import time
-
-try:
-    from PIL import Image, PILLOW_VERSION
-except:
-    print("[capture.py] Error: PIL module not available. To install"
-          " type: pip install Pillow")
-    sys.exit(1)
 
 
 # Config
