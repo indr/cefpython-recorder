@@ -180,8 +180,6 @@ current_milli_time = lambda: int(round(time.time() * 1000))
 
 class RenderHandler(object):
     def __init__(self):
-        global fifo
-        self.fifo = fifo
         self.frameCount = 0
         self.lastTime = current_milli_time()
 
@@ -205,9 +203,15 @@ class RenderHandler(object):
         # sys.stdout.flush()
 
         if element_type == cef.PET_VIEW:
-            buf = paint_buffer.GetString(mode="rgba", origin="top-left")
-            self.fifo.write(buf)
-            self.fifo.flush()
+            try:
+                global fifo
+                string_buffer = paint_buffer.GetString(mode="rgba", origin="top-left")
+                fifo.write(string_buffer)
+                fifo.flush()
+            except Exception as ex:
+                print("[capture.py] Error {0}".format(str(ex)))
+                # See comments in exit_app() why PostTask must be used
+                cef.PostTask(cef.TID_UI, exit_app, browser)
         else:
             raise Exception("Unsupported element_type in OnPaint")
 
