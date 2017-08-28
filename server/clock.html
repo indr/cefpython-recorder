@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <style type="text/css">
+	h1 {
+    margin: 5px;
+    padding: 5px;
+    color: black;
+		background-color: lime;	
+	}
+  </style>
+</head>
+<body>
+<h1 id="h1">Loading...</h1>
+
+<script type="text/javascript">
+function step () {
+  var date = new Date();
+  document.getElementById("h1").innerHTML = date.toString();
+  window.setTimeout(step, 1000 - date.getMilliseconds());
+}
+step();
+</script>
+</body>
+</html>
