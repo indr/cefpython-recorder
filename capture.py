@@ -33,7 +33,7 @@ import time
 URL = "https://github.com/cztomczak/cefpython"
 VIEWPORT_SIZE = (1024, 5000)
 FPS = 25
-SCREENSHOT_PATH = os.path.join(os.path.abspath(os.path.dirname(__file__)), "fifo.rgba")
+SCREENSHOT_PATH = os.path.join(os.path.abspath(os.path.dirname(__file__)), "fifo.bgra")
 
 
 def main():
@@ -193,8 +193,7 @@ class RenderHandler(object):
         if element_type == cef.PET_VIEW:
             try:
                 global fifo
-                string_buffer = paint_buffer.GetString(mode="rgba", origin="top-left")
-                fifo.write(string_buffer)
+                fifo.write(paint_buffer.GetString())
                 fifo.flush()
             except Exception as ex:
                 print("[capture.py] Error {0}".format(str(ex)))

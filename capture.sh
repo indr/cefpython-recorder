@@ -1,12 +1,11 @@
 #!/bin/bash
 
-if [ ! -e fifo.rgba ]
+if [ ! -e fifo.bgra ]
 then
-  mkfifo fifo.rgba
+  mkfifo fifo.bgra
 fi
 
 # python capture.py http://localhost:8082/clock.html 320 240 25
 # python capture.py http://localhost:8082/fps.html 320 240 50
-# python capture.py https://threejs.org/examples/webgl_points_dynamic.html 320 240 25
-python capture.py http://www.indr.ch/ 320 240 25
+python capture.py http://localhost:8081/?channel=program 1080 720 25
 

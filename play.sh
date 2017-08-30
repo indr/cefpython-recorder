@@ -1,9 +1,9 @@
 #!/bin/bash
 
-if [ ! -e fifo.rgba ]
+if [ ! -e fifo.bgra ]
 then
-  mkfifo fifo.rgba
+  mkfifo fifo.bgra
 fi
 
-ffplay -f rawvideo -pixel_format rgba -video_size 320x240 -framerate 25 fifo.rgba
+ffplay -f rawvideo -pixel_format bgra -video_size 1080x720 -framerate 25 fifo.bgra
 
