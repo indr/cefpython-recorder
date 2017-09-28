@@ -1,11 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if [ ! -e fifo.bgra ]
 then
   mkfifo fifo.bgra
 fi
 
-# python capture.py http://localhost:8082/clock.html 320 240 25
-# python capture.py http://localhost:8082/fps.html 320 240 50
-python capture.py http://localhost:8081/?channel=program 1080 720 25
+python capture.py http://localhost:8000/fps.html 640 480 25
+# python capture.py http://localhost:8000/clock.html 640 480 25
 
