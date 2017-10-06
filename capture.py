@@ -111,6 +111,7 @@ def create_browser():
     parent_window_handle = 0
     window_info = cef.WindowInfo()
     window_info.SetAsOffscreen(parent_window_handle)
+    window_info.SetTransparentPainting(True)
     print("[capture.py] Viewport size: {size}"
           .format(size=str(VIEWPORT_SIZE)))
     print("[capture.py] Max frames per second: {fps}"
