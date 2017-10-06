@@ -31,9 +31,9 @@ import time
 
 # Config
 URL = "https://github.com/cztomczak/cefpython"
-VIEWPORT_SIZE = (1024, 5000)
+VIEWPORT_SIZE = (1080, 720)
 FPS = 25
-SCREENSHOT_PATH = os.path.join(os.path.abspath(os.path.dirname(__file__)), "fifo.bgra")
+OUTFILE = os.path.join(os.path.abspath(os.path.dirname(__file__)), "fifo.bgra")
 
 
 def main():
@@ -44,9 +44,9 @@ def main():
     # option, so that RenderHandler callbacks are called.
     cef.Initialize(settings={"windowless_rendering_enabled": True},
                    commandLineSwitches={"disable-gpu": ""})
-    print("[capture.py] Open write {}".format(SCREENSHOT_PATH))
+    print("[capture.py] Open write {}".format(OUTFILE))
     global fifo
-    fifo = open(SCREENSHOT_PATH, 'w')
+    fifo = open(OUTFILE, 'w')
     global browser
     browser = create_browser()
     signal.signal(signal.SIGINT, exit_gracefully)
@@ -71,11 +71,12 @@ def check_versions():
 
 
 def command_line_arguments():
-    if len(sys.argv) == 5:
+    if len(sys.argv) == 6:
         url = sys.argv[1]
         width = int(sys.argv[2])
         height = int(sys.argv[3])
         fps = int(sys.argv[4])
+        outfile = sys.argv[5]
         if url.startswith("http://") or url.startswith("https://"):
             global URL
             URL = url
@@ -93,9 +94,13 @@ def command_line_arguments():
             FPS = fps
         else:
             print("[capture.py] Error: invalid fps")
-
+        if len(outfile) > 0:
+            global OUTFILE
+            OUTFILE = outfile
+        else:
+            print("[capture.py] Error: invalid outfile")
     elif len(sys.argv) > 1:
-        print("[capture.py] Error: Expected arguments: url width height fps")
+        print("[capture.py] Error: Expected arguments: url width height fps outfile")
         sys.exit(1)
 
 

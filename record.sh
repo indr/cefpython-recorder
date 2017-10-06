@@ -10,4 +10,11 @@ then
   rm output.mp4
 fi
 
-ffmpeg -f rawvideo -pix_fmt bgra -s:v 640x480 -i fifo.bgra -vf setpts='(RTCTIME - RTCSTART) / (TB * 1000000)' -pix_fmt yuv420p -c:v libx264 output.mp4
+ffmpeg -f rawvideo \
+  -pix_fmt bgra \
+  -s:v 640x480 \
+  -i fifo.bgra \
+  -vf setpts='(RTCTIME - RTCSTART) / (TB * 1000000)' \
+  -pix_fmt yuv420p \
+  -c:v libx264 \
+  output.mp4
