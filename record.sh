@@ -12,7 +12,7 @@ fi
 
 ffmpeg -f rawvideo \
   -pix_fmt bgra \
-  -s:v 640x480 \
+  -s:v 1280x720 \
   -i fifo.bgra \
   -vf setpts='(RTCTIME - RTCSTART) / (TB * 1000000)' \
   -pix_fmt yuv420p \
