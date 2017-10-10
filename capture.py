@@ -49,8 +49,10 @@ def main():
     fifo = open(OUTFILE, 'w')
     global browser
     browser = create_browser()
-    signal.signal(signal.SIGINT, exit_gracefully)
-    signal.signal(signal.SIGTERM, exit_gracefully)
+    # SIGINT or SIGTERM can't be caught due to a bug in CEF framework
+    # See https://github.com/cztomczak/cefpython/issues/400
+    # signal.signal(signal.SIGINT, exit_gracefully)
+    # signal.signal(signal.SIGTERM, exit_gracefully)
     cef.MessageLoop()
     print("[capture.py] Shutting down")
     cef.Shutdown()
@@ -194,7 +196,7 @@ class RenderHandler(object):
 
         sys.stdout.write("[capture.py] frame={number: >5} fps={fps: >6.2f}\r"
                 .format(number=self.frameCount, fps=fps))
-        # sys.stdout.flush()
+        sys.stdout.flush()
 
         if element_type == cef.PET_VIEW:
             try:
