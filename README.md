@@ -1,4 +1,4 @@
-# cef-recorder
+# CEF Python Recorder
 
 This repository contains scripts to play and/or record videos from websites using [CEF Python](https://github.com/cztomczak/cefpython). The Python script `capture.py` is a modification based on the `screenshot.py` script from the CEF Python examples.
 
